@@ -1,0 +1,57 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*, *:before,
+*:after {
+  box-sizing: inherit;
+}
+html {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto Condensed', arial, sans-serif;
+}
+#map {
+  width: 100%;
+  min-height: 100%;
+  background: #ddd;
+  top: 100px;
+  left: 0;
+  bottom: 0;
+  position: fixed;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 999;
+  background: #fff;
+  color: #000;
+}
+.header img {
+  border: none;
+  max-width: 100%;
+  height: auto;
+  max-height: 100px;
+  width: auto \9;
+}
+h1 {
+  font-size: 20px;
+}
+.block {
+  display: inline-block;
+  vertical-align: middle;
+}
+.header-list li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 10px;
+}
