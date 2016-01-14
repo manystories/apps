@@ -1,0 +1,38 @@
+
+header {
+  background: #C53E8A;
+}
+
+header h1 {
+  font-size: 40px;
+}
+
+header h2 {
+  color: #fff;
+  font-size: 17px;
+}
+
+#main-content h3::before {
+  color: #0174B3;
+}
+
+#main-content h4::before {
+  color: #0174B3;
+}
+
+.app-list {
+  padding: 0;
+}
+
+.app-list li {
+  list-style: none;
+  background: #3BBBE8;
+  font-size: 1.2em;
+  padding: 1em 5px;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #ddd;
+}
+
+.app-list a {
+  color: #fff;
+}
