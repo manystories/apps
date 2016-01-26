@@ -34,7 +34,7 @@
             .openPopup();
           //showPoint([$location.lat, $location.lon], $title);
           map.setView([$location.lat, $location.lon], 15);
-          //console.log(element);
+          console.log(element);
         });
 
       }
