@@ -38,12 +38,13 @@
           var $location = element.attributes.location;
           var $title = element.attributes.title;
           var $link = element.attributes.html_display;
+          var $address = element.attributes.postal_address;
 
           var marker = L.marker(new L.LatLng($location['lat'], $location['lon']), {
             title: $title,
           });
 
-          marker.bindPopup("<a href='"+$link+"'>" + $title + "</a>");
+          marker.bindPopup("<a href='"+$link+"'>" + $title + "</a><br>"+$address);
           markers.addLayer(marker);
 
           // Debugging
