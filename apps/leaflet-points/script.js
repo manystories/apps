@@ -6,15 +6,26 @@
     var $url = 'http://manystoriesoneheart.gr/api/v1.0/stories?filter[postal_address][value]=0&filter[postal_address][operator]=%22%3E%22&range=30';
     // The White tower lot/lan point
     var $thessaloniki = [40.6171048, 22.9594983];
-    // Initialize empty array of points
-    var $points = [];
 
-    // Create the map
-    var map = L.map("map");
-    L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(map);
+    // Debugging parameter
+    var debug = false;
 
-    // Set the view to Thessaloniki point (constant)
-    map.setView($thessaloniki, 15);
+    // Create the map using Leaflet.markercluster.
+    // More at https://github.com/Leaflet/Leaflet.markercluster.
+    var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Points &copy 2012 LINZ'
+    });
+
+    // Initial point to focus on.
+    var latlng = L.latLng($thessaloniki);
+
+    var map = L.map('map', {
+      center: latlng,
+      zoom: 13,
+      layers: [tiles]
+    });
+
+    var markers = new L.markerClusterGroup();
 
     // Get data from API with ajax
     $.ajax({
@@ -22,23 +33,29 @@
       url: $url,
       success: function (results) {
         //console.log(results);
-        $('.count-value').text(results.meta.count);
+        //$('.count-value').text(results.meta.count);
         $.each(results.data, function(index, element) {
           var $location = element.attributes.location;
           var $title = element.attributes.title;
           var $link = element.attributes.html_display;
 
-          L.marker([$location.lat, $location.lon])
-            .addTo(map)
-            .bindPopup("<a href='"+$link+"'>" + $title + "</a>")
-            .openPopup();
-          //showPoint([$location.lat, $location.lon], $title);
-          map.setView([$location.lat, $location.lon], 15);
-          console.log(element);
-        });
+          var marker = L.marker(new L.LatLng($location['lat'], $location['lon']), {
+            title: $title,
+          });
 
+          marker.bindPopup("<a href='"+$link+"'>" + $title + "</a>");
+          markers.addLayer(marker);
+
+          // Debugging
+          if (debug) {
+            console.log($location);
+          }
+        });
+        // Finally, add layer of the markers to the map.
+        map.addLayer(markers);
       }
     });
+
   });
 
 })(jQuery);
