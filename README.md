@@ -1,1 +1,1 @@
-Please go to the [online documentation](http://manystories.readthedocs.org/)
+Please go to the [online documentation](http://docs.manystoriesoneheart.gr)
