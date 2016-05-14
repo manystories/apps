@@ -32,7 +32,6 @@
       type: 'GET',
       url: $url,
       success: function (results) {
-        //console.log(results);
         //$('.count-value').text(results.meta.count);
         $.each(results.data, function(index, element) {
           var $location = element.attributes.location;
@@ -40,15 +39,18 @@
           var $link = element.attributes.html_display;
           var $address = element.attributes.postal_address;
 
-          var marker = L.marker(new L.LatLng($location['lat'], $location['lon']), {
-            title: $title,
-          });
+          if (null != element.attributes.location) {
+            var marker = L.marker(new L.LatLng($location['lat'], $location['lon']), {
+              title: $title,
+            });
 
-          marker.bindPopup("<a href='"+$link+"'>" + $title + "</a><br>"+$address);
-          markers.addLayer(marker);
+            marker.bindPopup("<a href='"+$link+"'>" + $title + "</a><br>"+$address);
+            markers.addLayer(marker);
+          }
 
           // Debugging
           if (debug) {
+            console.log(results);
             console.log($location);
           }
         });
